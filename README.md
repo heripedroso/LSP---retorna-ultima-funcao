@@ -16,7 +16,7 @@ Definir Tabela objColaborador[1] = {
                                      Alfa a2TCodigoCargo;
                                    };
 
-Definir Tabela objparamentrosEntrada[1] = {   
+Definir Tabela objParamentrosEntrada[1] = {   
                                      Data dataPrimeiroDiaDoMes;
                                      Data dataPrimeiroDiaDoMes; 
                                    };
