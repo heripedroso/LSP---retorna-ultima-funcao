@@ -1,6 +1,7 @@
 # LSP---retorna-ultima-funcao
 Função que retorna a última função atribuída ao colaborador em um determinado período.
 
+## Definir estrutura de tabela em Funções Globais
 ```
 Definir Tabela objColaborador[1] = {   
                                      Numero nNumEmp;
@@ -12,8 +13,17 @@ Definir Tabela objColaborador[1] = {
                                      Numero n2TNumCad;  @ Cadastro do 2º vínculo (2º teto). Pode ocorrer caso o colaborador seja da área assistencial (médico, enfermeiro, psicólogo, etc). @
                                      Numero n2TNumCra;  @ Crachá do 2º vínculo (2º teto). Pode ocorrercaso o colaborador seja da área assistencial (médico, enfermeiro, psicólogo, etc). @
                                      Alfa a2TFuncao;
+                                     Alfa a2TCodigoCargo;
                                    };
 
+Definir Tabela objparamentrosEntrada[1] = {   
+                                     Data dataPrimeiroDiaDoMes;
+                                     Data dataPrimeiroDiaDoMes; 
+                                   };
+```
+
+## Inserir trecho em seção detalhe
+```
 objColaborador[1].nNumEmp = R034FUN.NumEmp;
 objColaborador[1].nTipCol = R034FUN.TipCol;  
 objColaborador[1].nNumCad = R034FUN.NumCad;
@@ -24,31 +34,28 @@ objColaborador[1].n2TNumCad = 0;
 objColaborador[1].n2TNumCra = 0;
 objColaborador[1].a2TFuncao = "";
 objColaborador[1].a2TCodigoCargo = "";
+```
 
-Definir Funcao retornaUltimaFuncao();
+## Definir estrutura de tabela em Funções Globais
+```
+Definir Funcao retornaUltimaFuncao(Numero nVerifica2T);
 
-Funcao retornaUltimaFuncao();
+Funcao retornaUltimaFuncao(Numero nVerifica2T);
 {
 
-     @ Trata as entradas Data Início e Data Fim @
-     Definir Data dDataInicio;  dDataInicio = EDatInR;
-     Definir Alfa aDataInicio; 
-     ConverteDataBanco(dDataInicio, aDataInicio);
-     
-     Definir Data dDataFim;  dDataFim = EDatFiR;
-     Definir Alfa aDataFim; 
-     ConverteDataBanco(dDataFim, aDataFim);
-     
+     @ Trata as entradas Data Início e Data Fim @     
      Definir Data dDataZero;
-     Definir Alfa aDataZero; 
-     Definir Alfa gCodigoCargo; gCodigoCargo = ""; 
      MontaData (31, 12, 1900, dDataZero);
-     ConverteDataBanco(dDataZero, aDataZero);
+     @ dataPrimeiroDiaDoMes - variável definida em seção anterior.  @
+     @ dataUltimoDiaDoMes - variável definida em seção anterior. @
      @ ---------------------------------------- @
 
      nNumEmp = objColaborador[1].nNumEmp; 
      nTipCol = objColaborador[1].nTipCol;
      nNumCad = objColaborador[1].nNumCad;
+     Se(nVerifica2T = 1){
+           nNumCad = objColaborador[1].n2TNumCad;
+     }
      
      Definir Cursor cC54;
        
@@ -67,13 +74,21 @@ Funcao retornaUltimaFuncao();
      cC54.AbrirCursor();
      
      Enquanto (cC54.Achou) {
-            objColaborador[1].aFuncao = cC54.TitCar;
-            objColaborador[1].aCodigoCargo = cC54.codcar;
-            cC54.proximo();
-      }
+           Se(nVerifica2T = 0){
+                objColaborador[1].aFuncao = cC54.TitCar;
+                objColaborador[1].aCodigoCargo = cC54.codcar;
+           } 
+           Se(nVerifica2T = 1){
+                objColaborador[1].a2TFuncao = cC54.TitCar;
+                objColaborador[1].a2TCodigoCargo = cC54.codcar;
+           } 
+           cC54.proximo();
+     }
      cC54.FecharCursor();
      
 }
+
+
      
 ```
      
