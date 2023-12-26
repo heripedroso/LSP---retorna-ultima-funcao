@@ -19,7 +19,7 @@ Definir Tabela objParametrosEntrada[1] = {
                                    };
 ```
 
-## Inserir trecho em seção detalhe
+## Preencher valores antes de recuperar informações de função.
 ```
 objColaborador[1].nNumCPF = R034FUN.NumCpf;
 objColaborador[1].nNumEmp = R034FUN.NumEmp;
@@ -40,7 +40,8 @@ objColaborador[2].aCodigoCargo = "";
 */
 ```
 
-## Definir estrutura de tabela em Funções Globais
+## Recupera informações da função mais recente.
+* Função é uma atribuição temporária. Geralmente é um cargo de liderança atribuído a um colega apenas durante o período de férias/afastamento da liderança titular.
 ```
 Definir Funcao retornaUltimaFuncao(Numero nVinculo);
 
@@ -82,9 +83,6 @@ Funcao retornaUltimaFuncao(Numero nVinculo);
      }
      
      cC54.FecharCursor();   
-}
-
-
-     
+}     
 ```
      
