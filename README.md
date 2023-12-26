@@ -60,9 +60,9 @@ Funcao retornaUltimaFuncao(Numero nVinculo);
      Definir Data dFimMes; dFimMes = objParamentrosEntrada[1].dDataFimDoMes;
      
      @ ------- Acessa tabelas para recuperar informações de função ----------- @
-     Definir Cursor cC54;
+     Definir Cursor cFuncoes;
        
-     cC54.SQL "Select r024car.codcar, r024car.TitRed,r024car.TitCAR \
+     cFuncoes.SQL "Select r024car.codcar, r024car.TitRed,r024car.TitCAR \
                  From R038HFU r038hfu, R024CAR r024car \
                  where r038hfu.NumEmp = :nNumemp And r038hfu.TipCol = :nTipCol And r038hfu.NumCad = :nNumCad \ 
                  and r024car.CodCar = r038hfu.CodCar \
@@ -74,17 +74,17 @@ Funcao retornaUltimaFuncao(Numero nVinculo);
                                          or \
                                          Tab2.datfim = :dDataZero  \
                                      ))";
-     cC54.AbrirCursor();
+     cFuncoes.AbrirCursor();
      
      @ ----------- Grava valores na estrutura objColaborado[nVinculo] -------- @
-     Enquanto (cC54.Achou) {
-           objColaborador[nVinculo].aFuncao = cC54.TitCar;
-           objColaborador[nVinculo].aCodCargo = cC54.codcar;
+     Enquanto (cFuncoes.Achou) {
+           objColaborador[nVinculo].aFuncao = cFuncoes.TitCar;
+           objColaborador[nVinculo].aCodCargo = cFuncoes.codcar;
 
-           cC54.proximo();
+           cFuncoes.proximo();
      }
      
-     cC54.FecharCursor();   
+     cFuncoes.FecharCursor();   
 }
 ```
      
