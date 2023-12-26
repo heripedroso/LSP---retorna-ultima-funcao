@@ -59,6 +59,7 @@ Funcao retornaUltimaFuncao(Numero nVinculo);
      Definir Data dInicioMes; dInicioMes = objParamentrosEntrada[1].dDataInicioDoMes;
      Definir Data dFimMes; dFimMes = objParamentrosEntrada[1].dDataFimDoMes;
      
+     @ ------- Acessa tabelas para recuperar informações de função ----------- @
      Definir Cursor cC54;
        
      cC54.SQL "Select r024car.codcar, r024car.TitRed,r024car.TitCAR \
@@ -75,6 +76,7 @@ Funcao retornaUltimaFuncao(Numero nVinculo);
                                      ))";
      cC54.AbrirCursor();
      
+     @ ----------- Grava valores na estrutura objColaborado[nVinculo] -------- @
      Enquanto (cC54.Achou) {
            objColaborador[nVinculo].aFuncao = cC54.TitCar;
            objColaborador[nVinculo].aCodCargo = cC54.codcar;
@@ -83,6 +85,6 @@ Funcao retornaUltimaFuncao(Numero nVinculo);
      }
      
      cC54.FecharCursor();   
-}     
+}
 ```
      
